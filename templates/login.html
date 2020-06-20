@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+    登录
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href='{{ url_for('static',filename="css/register.css") }}'>
+{% endblock %}
+{% block content %}
+    <main class="r_box">
+        <div class="outter">
+            <div>
+                <img src="{{ url_for('static',filename='images/11.jpg') }}" style="width: 500px;height: 300px" >
+            </div>
+            <form action="" method="post">
+                <div class="form-contain">
+                    <div class="form-group">
+                        <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入手机号">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="pwd" name="password" class="form-control" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" id="btn" class="btn-warning btn-block btn" onclick="check()">登录</button>
+                </div>
+                <div>
+                    <span id="msg" style="color:red;">{{ msg }}</span>
+                </div>
+                <div>
+                    <a href="{{ url_for('register') }}">没有账号，去注册</a>
+                </div>
+            </form>
+
+        </div>
+  </main>
+
+{% endblock %}
+{% block script %}
+{#    <script>#}
+{#       function check() {#}
+{#           var phone=$('#phone').val();#}
+{#           var pwd=$('#pwd').val();#}
+{#           $.get('/check/',{"phone":phone,"pwd":pwd},function (rs) {#}
+{#               al(rs)#}
+{#           })#}
+{#       }#}
+{#    $(#}
+{% endblock %}

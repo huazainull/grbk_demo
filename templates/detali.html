@@ -1,0 +1,97 @@
+
+
+  {% extends 'base.html' %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <main>
+
+    <div class="infosbox">
+      <div class="newsview">
+        <h3 class="news_title">{{ article.title }}</h3>
+        <div class="bloginfo">
+          <ul>
+            <li class="author">作者：<a href="/">{{ article.author.username }}</a></li>
+            <li class="timer">时间：{{ article.up_time }}</li>
+          </ul>
+        </div>
+        <div class="news_about"><strong>简介</strong>{{ article.description }}</div>
+        <div class="news_con"> <strong>内容</strong>{{ article.content }}<br>
+          &nbsp; </div>
+      </div>
+      <div class="share">
+        <p class="diggit"><a id="zan"> 很赞哦！</a>(<span id="num">{{ article.zan_num }}</span>)</p>
+          <input type="hidden" value="{{ article.id }}" id="art_id">
+      </div>
+      <div class="nextinfo">
+          {% if article_previous %}
+        <p>上一篇：<a href="{{ url_for('detali',a_id=article_previous.id) }}">{{ article_previous.title }}</a></p>
+          {% else %}
+          <p>上一篇：<a href="#">已经是第一页了</a></p>
+          {% endif %}
+          {% if article_next %}
+           <p>下一篇：<a href="{{ url_for('detali',a_id=article_next.id) }}">{{ article_next.title }}</a></p>
+          {% else %}
+           <p>下一篇：<a href="#">没有更多了</a></p>
+          {% endif %}
+
+      </div>
+      <div class="news_pl">
+        <h2>文章评论</h2>
+        <div class="gbko">
+          <script src="/e/pl/more/?classid=77&amp;id=106&amp;num=20"></script>
+          <div class="fb">
+              {% for c in coms %}
+            <ul>
+              <p class="fbtime"><span>{{ c.content_time }}</span>{{ c.author.username }}</p>
+              <div class="ecomment">
+                <p class="ecommenttext">{{ c.content }}</p>
+              </div>
+            </ul>
+              {% endfor %}
+          </div>
+
+          <form action="" method="post">
+            <div id="plpost">
+              <p class="saying"><span>共有{{ com_num }}条评论</span>来说两句吧...</p>
+              <textarea name="content" rows="6" id="saytext"></textarea>
+              <input name="imageField" type="submit" value="提交">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(
+            function () {
+                $('#zan').click(
+
+                    function () {
+                        var num=parseInt($('#num').text());
+                        var art_id=$('#art_id').val();
+                        console.log(num);
+                        $.ajax(
+                            {
+                                url:'http://127.0.0.1:5000/changeNum/?num='+num+'&art_id='+art_id,
+                                type:'get',
+                                data:'',
+                                success:function (res) {
+                                    $('#num').text(num+1)
+                                },
+                                error:function (error) {
+
+                                    alert("cole ")
+                                }
+                            }
+                        )
+
+                    }
+                )
+            }
+        )
+    </script>
+{% endblock %}

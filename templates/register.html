@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+    注册
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href='{{ url_for('static',filename="css/register.css") }}'>
+{% endblock %}
+{% block content %}
+    <main class="r_box">
+        <div class="outter">
+            <div>
+                <img src="{{ url_for('static',filename='images/12.jpg') }}" style="width: 500px;height: 300px" >
+            </div>
+            <form action="" method="post">
+                <div class="form-contain">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="请输入姓名">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password1" class="form-control" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" class="form-control" placeholder="请再输密码">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="请输入手机号">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn-warning btn-block btn">注册</button>
+                </div>
+                <div>
+                    <span style="color: red">{{ result }}</span>
+                </div>
+                <div>
+                    <a href="{{ url_for('login') }}">已有账号，去登录</a>
+                </div>
+            </form>
+
+        </div>
+  </main>
+
+{% endblock %}
+{% block script %}
+{% endblock %}

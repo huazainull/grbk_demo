@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+    发表文章
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href='{{ url_for('static',filename="css/register.css") }}'>
+{% endblock %}
+{% block content %}
+    <main class="r_box">
+        <div class="outter">
+            <div>
+                <img src="{{ url_for('static',filename='images/12.jpg') }}" style="width: 500px;height: 300px" >
+            </div>
+            <form action="" method="post">
+                <div class="form-contain">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="请输入标题">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" placeholder="请输入描叙">
+                    </div>
+                    <div class="form-group">
+                        <select name="types" class="form-control">
+                            {% for t in types %}
+                            <option value="{{ t.id }}">{{ t.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="content" placeholder="请输入内容" class="form-control">
+                        </textarea>
+                    </div>
+
+                </div>
+                <div>
+                    <button type="submit" class="btn-warning btn-block btn">发表</button>
+                </div>
+            </form>
+
+        </div>
+  </main>
+
+{% endblock %}
+{% block script %}
+{% endblock %}

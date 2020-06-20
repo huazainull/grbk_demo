@@ -1,0 +1,9 @@
+.outter{
+    width: 500px;
+    height: 600px;
+    background-color: wheat;
+    margin: 0 auto;
+}
+#title{
+    text-align: center;
+}

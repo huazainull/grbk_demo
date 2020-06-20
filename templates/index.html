@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <main class="r_box">
+    {% if types %}
+    {% for i in types %}
+        <li><i><a href="/"><img src="{{ url_for("static",filename="images/1.jpg") }}"></a></i>
+          <h3><a href="{{ url_for('list',id=i.id) }}">{{ i.title }}</a></h3>
+          <p>{{ i.description }}</p>
+        </li>
+    {% endfor %}
+    {% else %}
+    <p>这家伙很懒，啥都没留下</p>
+    {% endif %}
+
+  </main>
+{% endblock %}
+{% block script %}
+{% endblock %}

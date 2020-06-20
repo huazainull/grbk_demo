@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <main class="r_box">
+    {% for m in messages %}
+        <div class="fb">
+        <ul>
+          <p class="fbtime"><span> {{ m.content_time }} </span> {{ m.author.username }}</p>
+          <p class="fbinfo">{{ m.content }}</p>
+        </ul>
+      </div>
+    {% endfor %}
+
+        <div class="hf">
+        <ul>
+          <p class="zzhf"><font color="#FF0000">站长回复:</font>感谢第一条留言的支持！：）</p>
+        </ul>
+      </div>
+
+
+        <form action="{{ url_for('message') }}" method="post" name="form1" id="form1">
+          <p> <strong>来说点儿什么吧...</strong></p>
+          <p><span class="tnr">留言内容:</span>
+            <textarea name="content" cols="60" rows="12" id="lytext"></textarea>
+          </p>
+          <p>
+            <input type="submit" name="Submit3" value="提交">
+            <input name="enews" type="hidden" id="enews" value="AddGbook">
+          </p>
+        </form>
+
+  </main>
+{% endblock %}
+{% block script %}
+{% endblock %}
