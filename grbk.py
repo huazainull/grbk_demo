@@ -8,10 +8,12 @@ app=Flask(__name__)
 app.config.from_object(config)
 db.init_app(app)
 
+# 模板页
 @app.route('/')
 def base():
     return  render_template('base.html')
 
+# 首页
 @app.route('/index/',methods=['POST','GET'])
 @valid
 def index():
@@ -22,6 +24,7 @@ def index():
     }
     return render_template('index.html',**result)
 
+# 文章列表页
 @app.route('/list/<id>/',methods=['GET'])
 @valid
 def list(id):
@@ -32,6 +35,7 @@ def list(id):
         }
         return render_template('list.html',**res)
 
+# 留言功能
 @app.route('/message/',methods=['GET','POST'])
 @valid
 def message():
@@ -49,6 +53,7 @@ def message():
 
     return render_template('message.html',messages=messages)
 
+# 文章详情页
 @app.route('/detali/<a_id>',methods=['GET','POST'])
 @valid
 def detali(a_id):
@@ -81,6 +86,7 @@ def detali(a_id):
         db.session.commit()
         return redirect(referer_url)
 
+# 注册功能
 @app.route('/register/',methods=['POST','GET'])
 def register():
     result=''
@@ -106,6 +112,7 @@ def register():
                 result="密码不一致"
     return  render_template('register.html',result=result)
 
+# 登录功能
 @app.route('/login/',methods=['POST','GET'])
 def login():
     msg=''
@@ -122,13 +129,14 @@ def login():
             # return '用户名密码错误'
     return  render_template('login.html',msg=msg)
 
+# 注销功能
 @app.route('/logout/',methods=['POST','GET'])
 def logout():
     # session.clear()
     del session['user_id']
     return redirect(url_for('login'))
 
-
+# 添加文章
 @app.route('/addArticle/',methods=['POST','GET'])
 @valid
 def addArticle():
@@ -156,6 +164,7 @@ def addArticle():
 
     return render_template('addArticle.html',**result)
 
+# 添加文章类型
 @app.route('/addType/',methods=['POST','GET'])
 @valid
 def addType():
@@ -171,6 +180,7 @@ def addType():
 
     return render_template('addType.html')
 
+# 点赞功能
 @app.route('/changeNum/',methods=['POST','GET'])
 def changeNum():
     if request.method=='GET':
@@ -183,6 +193,7 @@ def changeNum():
         db.session.commit()
         return '数据库已更新'
 
+# 搜索功能
 from sqlalchemy import or_
 @app.route('/seacher/',methods=['POST','GET'])
 def seacher():
@@ -206,7 +217,7 @@ def check():
                 return ""
             else:
                 return "账号或密码错误，请核对再输入"
-
+# 钩子函数，请求前调用
 @app.before_request
 def before_request():
     user_id=session.get('user_id')
@@ -215,7 +226,7 @@ def before_request():
         if user:
             g.user_id=user_id
             g.user=user
-
+# 钩子函数 上下文处理器
 @app.context_processor
 def context_processor():
     if hasattr(g,'user'):
